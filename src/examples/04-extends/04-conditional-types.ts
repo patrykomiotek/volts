@@ -30,7 +30,7 @@ type NonPromiseType = UnwrapPromise<number>; // number
 
 // @ts-expect-error
 type OnlyStringProperties<T> = {
-  //   [K in keyof T as T[K] extends string ? K : never]?: T[K] // optional
+  // [K in keyof T as T[K] extends string ? K : never]?: T[K] // optional
   //   readonly [K in keyof T as T[K] extends string ? K : never]: T[K]
   //   [K in keyof T as T[K] extends string ? K : never]-?: T[K] // all required
   [K in keyof T as T[K] extends string ? K : never]: T[K];

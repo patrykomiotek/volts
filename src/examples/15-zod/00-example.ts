@@ -19,11 +19,13 @@ export const validationSchema = z.object({
   // policy: z.string().min(3, 'Password is too short'),
 });
 
+// export type UserRegistrationDto = z.infer<typeof validationSchema>;
+
 export type UserRegistrationDto = z.infer<typeof validationSchema>;
 
 // 1. form
 // 2. walidacja validationSchema
-// 3.
+// 3. tworzymy typ
 
 validationSchema.parse({
   username: 'aaaa',

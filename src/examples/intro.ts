@@ -39,3 +39,10 @@ type ReadonlyMember = typeof readonlyEmployee;
 // if (sth typeof === 'object') {
 //   console.log('error');
 // }
+
+type Abc = {
+  name: string;
+};
+// duzo kodu
+
+// const abc = { length: 123 } as unknown as Abc;
