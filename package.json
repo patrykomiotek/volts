@@ -1,0 +1,56 @@
+{
+  "name": "typescript-workshops",
+  "version": "1.0.0",
+  "description": "Workshops examples",
+  "main": "index.js",
+  "scripts": {
+    "clean:js": "rimraf --glob **/*.js !node_modules/**/*.js",
+    "dev": "vite",
+    "tsc": "tsc --project tsconfig.json",
+    "tsc:watch": "tsc --project tsconfig.json --watch",
+    "build": "tsc && vite build",
+    "preview": "vite preview",
+    "test": "vitest",
+    "coverage": "vitest run --coverage",
+    "simple-script": "tsx scripts/simple-script.ts",
+    "server": "ts-node src/web-server/index.ts"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/patrykomiotek/typescript-workshops.git"
+  },
+  "keywords": [
+    "typescript"
+  ],
+  "author": "Patryk Omiotek",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/patrykomiotek/typescript-workshops/issues"
+  },
+  "homepage": "https://github.com/patrykomiotek/typescript-workshops#readme",
+  "devDependencies": {
+    "@types/jquery": "^3.5.30",
+    "@types/node": "^22.5.2",
+    "@types/uuid": "^10.0.0",
+    "autoprefixer": "^10.4.20",
+    "cross-fetch": "^4.0.0",
+    "rimraf": "^6.0.1",
+    "jsdom": "^25.0.0",
+    "postcss": "^8.4.42",
+    "prettier": "^3.3.3",
+    "tailwindcss": "^3.4.10",
+    "tsx": "^4.19.0",
+    "typescript": "^5.5.4",
+    "vite": "^5.4.2",
+    "vite-plugin-checker": "^0.7.2",
+    "vite-tsconfig-paths": "^5.0.1",
+    "vitest": "^2.0.5"
+  },
+  "dependencies": {
+    "date-fns": "^3.6.0",
+    "jquery": "^3.7.1",
+    "ts-node": "^10.9.2",
+    "uuid": "^10.0.0",
+    "zod": "^3.23.8"
+  }
+}
