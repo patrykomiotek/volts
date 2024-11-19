@@ -5,6 +5,7 @@ const guitarists = new Set<string>();
 
 guitarists.add('Jimi Hendrix');
 guitarists.add('Eric Clapton');
+// guitarists.add(12345);
 
 it('Should contain Jimi and Eric', () => {
   expect(guitarists.has('Jimi Hendrix')).toEqual(true);
@@ -23,9 +24,21 @@ it('Should be typed as an array of strings', () => {
   type tests = Expect<Equal<typeof guitaristsAsArray, string[]>>;
   const _test: Equal<typeof guitaristsAsArray, string[]> = true;
 
-  type Hide<T, S extends keyof T> = {
-    [K in keyof T]: K extends S ? never : T[K];
+  // type Hide<T, S extends keyof T> = {
+  //   [K in keyof T]: K extends S ? never : T[K];
+  // };
+
+  // removing key from type
+  type Hide<T, K extends keyof T> = {
+    [P in keyof T as P extends K ? never : P]: T[P];
   };
+
+  // type OnlyStringProperties<T> = {
+  //   [K in keyof T as T[K] extends string ? K : never]: T[K]
+  // };
+
+  type MyHostConfig<T, K extends keyof T> = Omit<T, K> & Required<Pick<T, K>>;
+
   interface Config {
     host: string;
     port: number;
@@ -36,7 +49,5 @@ it('Should be typed as an array of strings', () => {
     // FIXME: Equal<Hide<Config, 'host'>, { port: number; path: string }>
     Equal<Omit<Config, 'host'>, { port: number; path: string }>
   >;
-  type HidePath = Expect<
-    Equal<Omit<Config, 'path'>, { host: string; port: number }>
-  >;
+  type HidePath = Expect<Equal<ReturnType<func>, { readonly field1: string }>>;
 });

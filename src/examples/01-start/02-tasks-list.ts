@@ -58,9 +58,17 @@ newTasks.set('two', {
 
 class MyCache {
   // constructor(private cache: CacheEntry) {}
-  constructor(private cache: Map<string, Task>) {}
+  // constructor(private cache: Map<string, Task>) {}
+  // private cache: Map<string, Task> = new Map();
+  // private cache = new Map<string, Task>();
+  private cache: Record<string, Task> = {};
+
+  // constructor() {}
 
   add(key: string, value: Task) {
     this.cache.set(key, value);
   }
 }
+
+const _cache = new MyCache();
+_cache.add('key-1', { id: 123, title: 'Kupić mleko', complete: false });

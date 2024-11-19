@@ -9,7 +9,7 @@ interface Dog extends Animal {
 type A = {
   name: string;
   breed: string;
-}
+};
 
 interface B {
   name: string;
@@ -17,7 +17,7 @@ interface B {
 }
 
 const c = {
-  name: '';
-  breed: '';
-}
+  name: '',
+  breed: '',
+};
 type C = typeof c;
