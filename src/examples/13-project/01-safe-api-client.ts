@@ -27,59 +27,34 @@ type ApiSpec = {
   };
 };
 
-type RequestParams<T extends keyof ApiSpec> = ApiSpec[T]['request'];
+type RequestType<T extends keyof ApiSpec> = ApiSpec[T]['request'];
 type ResponseType<T extends keyof ApiSpec> = ApiSpec[T]['response'];
 
 class ApiClient {
-  constructor(private baseUrl: string) {}
+  constructor(public apiUrl = `https://${string}.com`) {}
 
-  async request<K extends keyof ApiSpec>(
-    method: 'GET' | 'POST',
-    endpoint: K,
-    params?: RequestParams<K>,
-  ): Promise<ResponseType<K>> {
-    // Symulacja żądania HTTP (możesz użyć fetch lub axios tutaj)
-    console.log(
-      `Wykonywanie requestu ${method} do ${this.baseUrl}/${endpoint}`,
-      { params },
-    );
-
-    try {
-      // Mockowanie odpowiedzi na podstawie punktu końcowego
-      const mockResponse = this.mockResponse(endpoint);
-      return new Promise((resolve) =>
-        setTimeout(() => resolve(mockResponse), 1000),
-      );
-    } catch (error) {
-      console.error('Błąd podczas wykonywania żądania:', error);
-      throw error; // Rethrow the error after logging
-    }
-  }
-
-  private mockResponse<K extends keyof ApiSpec>(endpoint: K): ResponseType<K> {
-    // Zwróć dane mockowe na podstawie punktu końcowego
-    switch (endpoint) {
-      case 'getUser':
-        return { name: 'Alice', age: 30 } as ResponseType<K>;
-      case 'createUser':
-        return { id: 1 } as ResponseType<K>;
-      default:
-        throw new Error('Invalid endpoint');
-    }
+  async request<EndpointType extends keyof ApiSpec>( // EndpointType = 'getUser' | 'createUser'
+    httpMethod: 'GET' | 'POST',
+    resource: EndpointType,
+    payload: RequestType<EndpointType>,
+  ): Promise<ResponseType<EndpointType>> {
+    // const respone = await fetch(`${apiUrl}/${resource});
+    // const data = await response.json() as ResponseType<EndpointType>
+    const data = {} as ResponseType<EndpointType>;
+    return Promise.resolve<ResponseType<EndpointType>>(data);
   }
 }
 
-const apiClient = new ApiClient('https://api.example.com');
+const client = new ApiClient();
+const response = client.request('GET', 'getUser', { id: 123 });
 
-async function run() {
-  const user = await apiClient.request('GET', 'getUser', { id: 1 });
-  console.log(user); // { name: 'Alice', age: 30 }
+// type CreateUserRequest = RequestType<'createUser'>
 
-  const newUser = await apiClient.request('POST', 'createUser', {
-    name: 'Bob',
-    age: 25,
-  });
-  console.log(newUser); // { id: 1 }
-}
+// const user = await apiClient.request('GET', 'getUser', { id: 1 });
+// console.log(user); // { name: 'Alice', age: 30 }
 
-run();
+// const newUser = await apiClient.request('POST', 'createUser', {
+//   name: 'Bob',
+//   age: 25,
+// });
+// console.log(newUser); // { id: 1 }
