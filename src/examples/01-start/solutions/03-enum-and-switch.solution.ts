@@ -29,5 +29,7 @@ function getWorkingHours(day: DayOfWeek): number {
 }
 
 // Przykładowe użycie:
-console.log(getWorkingHours(DayOfWeek.Monday)); // Powinno zwrócić 8
-console.log(getWorkingHours(DayOfWeek.Saturday)); // Powinno zwrócić 0
+it('Should return valid values for days of week', () => {
+  expect(getWorkingHours(DayOfWeek.Monday)).toEqual(8);
+  expect(getWorkingHours(DayOfWeek.Saturday)).toEqual(0);
+});

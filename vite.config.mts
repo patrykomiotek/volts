@@ -14,11 +14,14 @@ export default defineConfig({
   //   },
   // },
   test: {
-    include: ['src/**/*.ts'],
+    include: ['src/**/*.{problem,solution}.ts'],
     setupFiles: [path.resolve(__dirname, 'scripts/setup.ts')],
     passWithNoTests: true,
     environment: 'jsdom',
     globals: true,
+    typecheck: {
+      ignoreSourceErrors: true,
+    },
   },
   plugins: [tsconfigPaths()],
   // plugins: [checker({ typescript: true })]

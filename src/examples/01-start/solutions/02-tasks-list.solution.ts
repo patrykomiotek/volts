@@ -12,27 +12,29 @@ interface Task {
   complete: boolean;
 }
 
-// Utwórz tablicę tasks
+// Utwórz kolekcję tasks
+// const tasks: Task[] = [];
 const tasks = new Set<Task>();
 
 // Zaimplementuj funkcję addTask
 function addTask(title: string): void {
-  // Implementacja
+  // tasks.push({
+  //   id: 1,
+  //   title,
+  //   complete: false
+  // });
   tasks.add({
-    id: 123,
-    title,
-    complete: false,
-  });
-  tasks.add({
-    id: 123,
+    id: 1,
     title,
     complete: false,
   });
 }
 
 // Przykładowe użycie:
-addTask('Learn TypeScript');
-console.log(tasks.entries());
+it('Should have proper values', () => {
+  addTask('Learn TypeScript');
+  expect(tasks.size).toEqual(1);
+});
 
 // {
 //   key: string | Task;
@@ -58,17 +60,9 @@ newTasks.set('two', {
 
 class MyCache {
   // constructor(private cache: CacheEntry) {}
-  // constructor(private cache: Map<string, Task>) {}
-  // private cache: Map<string, Task> = new Map();
-  // private cache = new Map<string, Task>();
-  private cache: Record<string, Task> = {};
-
-  // constructor() {}
+  constructor(private cache: Map<string, Task>) {}
 
   add(key: string, value: Task) {
     this.cache.set(key, value);
   }
 }
-
-const _cache = new MyCache();
-_cache.add('key-1', { id: 123, title: 'Kupić mleko', complete: false });
