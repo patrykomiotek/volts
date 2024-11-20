@@ -40,8 +40,8 @@ class ApiClient {
   ): Promise<ResponseType<K>> {
     // Symulacja żądania HTTP (możesz użyć fetch lub axios tutaj)
     console.log(
-      `Wykonywanie ${method} żądania do ${this.baseUrl}/${endpoint}`,
-      params,
+      `Wykonywanie requestu ${method} do ${this.baseUrl}/${endpoint}`,
+      { params },
     );
 
     try {
@@ -64,7 +64,7 @@ class ApiClient {
       case 'createUser':
         return { id: 1 } as ResponseType<K>;
       default:
-        throw new Error('Nieznany punkt końcowy');
+        throw new Error('Invalid endpoint');
     }
   }
 }
