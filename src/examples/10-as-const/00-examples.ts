@@ -26,4 +26,4 @@ const y = x as const; // Błąd: A 'const' assertion can only be applied to a st
 const nested = {
   arr: [1, 2, 3],
 } as const;
-nested.arr.push(4); // To nadal działa (choć nie powinno)
+nested.arr.push(4); // To nadal działa w runtime (choć nie powinno)

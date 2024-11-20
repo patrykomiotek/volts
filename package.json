@@ -14,7 +14,7 @@
     "ts-node": "ts-node",
     "coverage": "vitest run --coverage",
     "simple-script": "tsx scripts/simple-script.ts",
-    "server": "ts-node src/web-server/index.ts",
+    "server": "tsx src/web-server/index.ts",
     "e-01-01": "vitest src/examples/01-start/01-calculator.problem.ts",
     "e-01-01-s": "vitest src/examples/01-start/solutions/01-calculator.solution.ts",
     "e-01-02": "vitest src/examples/01-start/02-task-list.problem.ts",
@@ -44,7 +44,8 @@
     "e-06-08-r": "tsx src/examples/06-decorators/08-combining-decorators.ts",
     "e-13-01-r": "tsx src/examples/13-project/01-safe-api-client.ts",
     "e-13-02-r": "tsx src/examples/13-project/02-pizza-delivery.ts",
-    "e-13-04-r": "tsx src/examples/13-project/04-state-manager.ts"
+    "e-13-04-r": "tsx src/examples/13-project/04-state-manager.ts",
+    "e-10-00-r": "tsx src/examples/10-as-const/00-examples.ts"
   },
   "repository": {
     "type": "git",

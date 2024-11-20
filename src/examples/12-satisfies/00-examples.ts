@@ -1,7 +1,14 @@
 type RGB = [number, number, number];
 type Color = { [key: string]: string | RGB };
+// type RGBColor = { [key: string]: RGB } satisfies Color;
 
 // Z użyciem satisfies
+const palette2: Color = {
+  red: [255, 0, 0],
+  green: '#00ff00',
+  blue: [0, 0, 255],
+};
+
 const palette = {
   red: [255, 0, 0],
   green: '#00ff00',

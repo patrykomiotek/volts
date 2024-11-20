@@ -34,6 +34,10 @@ const convertCurrency = <T extends Currencies, U extends Currencies>(
   return (fromCurrency * rate) as Currency<U>;
 };
 
+// bład
+// type Currencies = 'USD' | 'EUR' | 'GBP';
+// type Currency<T extends Currencies> = number & { [currencyBrand]: T } ;
+// number & { [currencyBrand]: T }  + number & { [currencyBrand]: T }
 const addCurrencies = <T extends Currencies>(
   a: Currency<T>,
   b: Currency<T>,
@@ -51,6 +55,8 @@ const usd = createCurrency(100, 'USD');
 
 const eur = convertCurrency(usd, 'EUR', 0.85); // Konwersja USD na EUR
 const gbp = createCurrency(50, 'GBP');
+
+const result = eur + eur; // result powinien byc Currency<EUR>
 
 addCurrencies(usd, eur); // Powinno zgłosić błąd kompilacji (różne waluty)
 addCurrencies(usd, createCurrency(200, 'USD')); // Powinno działać

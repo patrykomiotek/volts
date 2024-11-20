@@ -24,20 +24,17 @@ export interface Task {
 // Typ dla tworzenia nowego zadania
 export type NewTask = Omit<Task, 'id' | 'status'> & { status?: TaskStatus };
 
-// Generyczny typ dla akcji
+// generic type for action
 export type Action<T extends string, P = void> = P extends void
   ? { type: T }
   : { type: T; payload: P };
 
-// Typy akcji
+// action type
 export type TaskAction =
   | Action<'ADD_TASK', NewTask>
   | Action<'UPDATE_TASK', Task>
   | Action<'DELETE_TASK', TaskId>
   | Action<'SET_STATUS', { id: TaskId; status: TaskStatus }>;
-
-// src/taskManager.ts
-import { Task, TaskId, NewTask, TaskAction, TaskStatus } from './types';
 
 class TaskManager {
   private tasks: Map<TaskId, Task> = new Map();
