@@ -15,8 +15,25 @@
  * 6. Use case: Wykorzystaj klienta API z przykladowym adresem np. https://api.example.com i specyfikacją API.
  */
 
+interface AbstractSpec {
+  [key: string]: {
+    request: unknown;
+    response: unknown;
+  };
+}
+
+// class MySpec implements AbstractSpec {
+//   foo = {
+//     request: undefined,
+//     response: undefined,
+//   };
+//   secondField = {
+
+//   }
+// }
+
 // przykładowa struktura
-type ApiSpec = {
+interface ApiSpec extends AbstractSpec {
   getUser: {
     request: { id: number };
     response: { name: string; age: number };
@@ -25,23 +42,57 @@ type ApiSpec = {
     request: { name: string; age: number };
     response: { id: number };
   };
-};
+}
 
-type RequestType<T extends keyof ApiSpec> = ApiSpec[T]['request'];
-type ResponseType<T extends keyof ApiSpec> = ApiSpec[T]['response'];
+interface User {
+  id: string;
+  email: string;
+  age: number;
+}
 
-class ApiClient {
+type Email = User['email'];
+type PickedEmail = Pick<User, 'email'>;
+
+// type ApiSpec = {
+//   getUser: {
+//     request: { id: number };
+//     response: { name: string; age: number };
+//   };
+//   createUser: {
+//     request: { name: string; age: number };
+//     response: { id: number };
+//   };
+// };
+// const ApiSpec = {
+//   getUser: {
+//     request: { id: number };
+//     response: { name: string; age: number };
+//   };
+//   createUser: {
+//     request: { name: string; age: number };
+//     response: { id: number };
+//   };
+// };
+
+// type RequestType<T extends AbstractSpec, K extends keyof T> = T[K]['request'];
+// type ResponseType<T extends keyof AbstractSpec> = AbstractSpec[T]['response'];
+
+class ApiClient<Spec extends AbstractSpec> {
   constructor(public apiUrl = `https://${string}.com`) {}
 
-  async request<EndpointType extends keyof ApiSpec>( // EndpointType = 'getUser' | 'createUser'
+  async request<EndpointType extends keyof Spec>( // Spec[EndpointType] extends keyof Spec,  EndpointType = 'getUser' | 'createUser'
     httpMethod: 'GET' | 'POST',
     resource: EndpointType,
-    payload: RequestType<EndpointType>,
-  ): Promise<ResponseType<EndpointType>> {
+    payload: Spec[EndpointType]['request'], //
+  ): Promise<Spec[EndpointType]['response']> {
     // const respone = await fetch(`${apiUrl}/${resource});
     // const data = await response.json() as ResponseType<EndpointType>
-    const data = {} as ResponseType<EndpointType>;
-    return Promise.resolve<ResponseType<EndpointType>>(data);
+
+    // option with RequestType and ResponseTy[e]
+    // const data = {} as ResponseType<EndpointType>;
+    // return Promise.resolve<ResponseType<EndpointType>>(data);
+
+    return Promise.resolve({}) as Promise<Spec[EndpointType]['response']>;
   }
 }
 
