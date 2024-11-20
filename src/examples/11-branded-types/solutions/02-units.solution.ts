@@ -7,7 +7,7 @@
 type Meters = number & { readonly brand: unique symbol };
 type Feet = number & { readonly brand: unique symbol };
 
-const metersToFeet = (arg: Meters): Feet => {
+const metersToFeet = (arg: Meters) => {
   let value = 123;
   return value as Feet;
 };
